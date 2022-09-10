@@ -8,6 +8,7 @@ import classes from './AddUser.module.css';
 const AddUser = (props) => {
 const nameInputRef= useRef() 
  const ageInputRef= useRef()
+ const collageInputRef= useRef()
  
   // const [enteredUsername, setEnteredUsername] = useState('');
   // const [enteredAge, setEnteredAge] = useState('');
@@ -16,8 +17,9 @@ const nameInputRef= useRef()
   const addUserHandler = (event) => {
     event.preventDefault();
      const enteredname=nameInputRef.current.value
-     const enteredage=nameInputRef.current.value
-    if (enteredname.trim().length === 0 || enteredage.trim().length === 0) {
+     const enteredage=ageInputRef.current.value
+     const enteredcollage=collageInputRef.current.value
+    if (enteredname.trim().length === 0 || enteredage.trim().length === 0 || enteredcollage.trim().length===0) {
       setError({
         title: 'Invalid input',
         message: 'Please enter a valid name and age (non-empty values).',
@@ -31,9 +33,10 @@ const nameInputRef= useRef()
       });
       return;
     }
-    props.onAddUser(enteredname, enteredage);
+    props.onAddUser(enteredname, enteredage,enteredcollage);
     nameInputRef.current.value=''  // importent this is not a good practice do nut manumulate dom with this
     ageInputRef.current.value='' 
+    collageInputRef.current.value=''
   };
 
   // const usernameChangeHandler = (event) => {
@@ -65,7 +68,7 @@ const nameInputRef= useRef()
             type="text"
             // value={enteredUsername}
             // onChange={usernameChangeHandler}
-            ref={nameInputRef}
+            ref={nameInputRef}    //  impor in console.log it will show whole input element
           />
           <label htmlFor="age">Age (Years)</label>
           <input
@@ -74,6 +77,14 @@ const nameInputRef= useRef()
             // value={enteredAge}
             // onChange={ageChangeHandler}
             ref={ageInputRef}
+          />
+          <label htmlFor="age">Collage</label>
+          <input
+            
+            type="text"
+            // value={enteredAge}
+            // onChange={ageChangeHandler}
+            ref={collageInputRef}
           />
           <Button type="submit">Add User</Button>
         </form>
